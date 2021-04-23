@@ -10,7 +10,7 @@ export default class SettingsController {
 
         const settingsService = new SettingsService();
 
-        const setting = await settingsService.execute({chat, username});
+        const setting = await settingsService.create({chat, username});
     
         return response.status(201).json(setting);
 
