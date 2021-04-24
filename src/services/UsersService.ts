@@ -15,14 +15,6 @@ export default class UsersService {
 
     public async create({ email }: IUsersCreate): Promise<User> { 
       
-      const userAlreadyExists = await this.usersRepository.findOne({
-        email
-      });
-
-      if (userAlreadyExists) { 
-        return userAlreadyExists;
-      }
-
       const user = this.usersRepository.create({
         email
       });
@@ -31,4 +23,17 @@ export default class UsersService {
 
       return user;
     }
+
+  public async findByEmail({ email }: IUsersCreate): Promise<User | null> { 
+    
+    const user = await this.usersRepository.findOne({
+      email
+    });
+
+    if (!user) { 
+      return null;
+    }
+
+    return user;
+  }
 }
